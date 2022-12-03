@@ -19,6 +19,6 @@ Add this to your module's `build.gradle` file (make sure the version matches the
 
 ```
 dependencies {
-	        implementation 'com.github.dev-aniketj:check-internet-connection:1.0.2'
+	        implementation 'com.github.dev-aniketj:check-internet-connection:1.0.3'
 	}
 ```
