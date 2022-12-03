@@ -23,9 +23,7 @@ public class InternetConnectivity {
     public static void checkConnectionCloseActivity(Context context, int TIME) {
         if (!isInternetConnected(context)) {
             final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(() -> {
-                ((Activity) context).finish();
-            }, TIME);
+            handler.postDelayed(() -> ((Activity) context).finishAffinity(), TIME);
         }
     }
 
@@ -33,9 +31,7 @@ public class InternetConnectivity {
         if (!isInternetConnected(context)) {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(() -> {
-                ((Activity) context).finish();
-            }, TIME);
+            handler.postDelayed(() -> ((Activity) context).finishAffinity(), TIME);
         }
     }
 }
