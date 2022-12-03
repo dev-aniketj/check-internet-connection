@@ -9,11 +9,6 @@ import android.os.Looper;
 import android.widget.Toast;
 
 public class InternetConnectivity {
-    Context context;
-
-    public InternetConnectivity(Context context) {
-        this.context = context;
-    }
 
     public static boolean isInternetConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -25,12 +20,21 @@ public class InternetConnectivity {
         return connection_flag;
     }
 
-    private void checkConnectionCloseActivity(Context context, int TIME) {
+    public static void checkConnectionCloseActivity(Context context, int TIME) {
         if (!isInternetConnected(context)) {
-            Toast.makeText(context, "Please check your internet connection", Toast.LENGTH_LONG).show();
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(() -> {
-                ((Activity)context).finish();
+                ((Activity) context).finish();
+            }, TIME);
+        }
+    }
+
+    public static void checkConnectionCloseActivity(Context context, int TIME, String message) {
+        if (!isInternetConnected(context)) {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(() -> {
+                ((Activity) context).finish();
             }, TIME);
         }
     }
