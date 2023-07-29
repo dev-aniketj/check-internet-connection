@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 19
+        minSdk 16
         //noinspection OldTargetApi
         targetSdk 32
 
