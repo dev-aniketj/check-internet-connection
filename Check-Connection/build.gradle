@@ -4,12 +4,11 @@ plugins {
 
 android {
     namespace 'com.anikejain.check_connection'
-    compileSdk 32
+    compileSdk 34
 
     defaultConfig {
         minSdk 16
-        //noinspection OldTargetApi
-        targetSdk 32
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -17,7 +16,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

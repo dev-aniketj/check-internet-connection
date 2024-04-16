@@ -8,27 +8,26 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 public class InternetConnectivity {
 
     public static boolean isInternetConnected(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        boolean connection_flag = false;
-        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
-                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
-            connection_flag = true;
-        }
-        return connection_flag;
+        //noinspection deprecation
+        return Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)).getState() != NetworkInfo.State.CONNECTED &&
+                Objects.requireNonNull(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)).getState() != NetworkInfo.State.CONNECTED;
     }
 
     public static void checkConnectionCloseActivity(Context context, int TIME) {
-        if (!isInternetConnected(context)) {
+        if (isInternetConnected(context)) {
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(() -> ((Activity) context).finishAffinity(), TIME);
         }
     }
 
     public static void checkConnectionCloseActivity(Context context, int TIME, String message) {
-        if (!isInternetConnected(context)) {
+        if (isInternetConnected(context)) {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(() -> ((Activity) context).finishAffinity(), TIME);
